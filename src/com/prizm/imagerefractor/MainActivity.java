@@ -7,7 +7,9 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends ListActivity 
 {
@@ -22,6 +24,15 @@ public class MainActivity extends ListActivity
         lv=(ListView)findViewById(android.R.id.list);
         
         ArrayList<File> myImages = findImages(Environment.getExternalStorageDirectory());
+        
+        Toast.makeText(this, ""+myImages.size(), Toast.LENGTH_SHORT).show();
+        items = new String[myImages.size()];
+        for(int i=0;i<items.length;i++)
+        {
+        	items[i]=myImages.get(i).getName().toString().replace(".jpg","").replace(".jpeg", "").replace(".png", "");
+        }
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+        lv.setAdapter(adp);
         
         
     }
