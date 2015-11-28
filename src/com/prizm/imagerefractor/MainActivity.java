@@ -7,7 +7,6 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,8 +30,8 @@ public class MainActivity extends ListActivity
         {
         	items[i]=myImages.get(i).getName().toString().replace(".jpg","").replace(".jpeg", "").replace(".png", "");
         }
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
-        lv.setAdapter(adp);
+        CustomList1 customList = new CustomList1(this,items);
+        lv.setAdapter(customList);
         
         
     }
