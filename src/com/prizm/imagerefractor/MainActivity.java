@@ -4,13 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Menu;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends ListActivity 
+import com.prizm.imagerefractor.CustomList1.CustomInterface;
+
+public class MainActivity extends ListActivity implements CustomInterface 
 {
 	ListView lv;
 	String items[];
@@ -31,6 +33,7 @@ public class MainActivity extends ListActivity
         	items[i]=myImages.get(i).getName().toString().replace(".jpg","").replace(".jpeg", "").replace(".png", "");
         }
         CustomList1 customList = new CustomList1(this,items);
+        customList.setInterface(this);
         lv.setAdapter(customList);
         
         
@@ -64,13 +67,14 @@ public class MainActivity extends ListActivity
     }
 
     
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) 
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
+	@Override
+	public void onClick(int position) 
+	{
+		// TODO Auto-generated method stub
+		Intent i = new Intent (MainActivity.this,ImageEditor.class);
+		startActivity(i);
+		
+	}
     
 }
