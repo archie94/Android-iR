@@ -16,6 +16,7 @@ public class MainActivity extends ListActivity implements CustomInterface
 {
 	ListView lv;
 	String items[];
+	ArrayList<File> myImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -24,7 +25,7 @@ public class MainActivity extends ListActivity implements CustomInterface
         setContentView(R.layout.activity_main);
         lv=(ListView)findViewById(android.R.id.list);
         
-        ArrayList<File> myImages = findImages(Environment.getExternalStorageDirectory());
+        myImages = findImages(Environment.getExternalStorageDirectory());
         
         Toast.makeText(this, ""+myImages.size(), Toast.LENGTH_SHORT).show();
         items = new String[myImages.size()];
@@ -72,8 +73,7 @@ public class MainActivity extends ListActivity implements CustomInterface
 	public void onClick(int position) 
 	{
 		// TODO Auto-generated method stub
-		Intent i = new Intent (MainActivity.this,ImageEditor.class);
-		startActivity(i);
+		startActivity(new Intent (MainActivity.this,ImageEditor.class).putExtra("position", position).putExtra("ImageList", myImages));
 		
 	}
     
